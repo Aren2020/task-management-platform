@@ -38,10 +38,33 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+    'corsheaders',
+
     'account',
 ]
 
 AUTH_USER_MODEL = 'account.CustomUser'
+
+CORS_ORIGIN_ALLOW_ALL = True 
+CORS_ALLOW_CREDENTIALS = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+from datetime import timedelta
+SIMPLE_JWT = {
+    'ROTATE_REFRESH_TOKENS': True, # new access_token also mean new refresh_token
+    'BLACKLIST_AFTER_ROTATION': True, # old refresh_token is invalid
+    'ACCESS_TOKEN_LIFETIME': timedelta(days = 30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days = 60),
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
