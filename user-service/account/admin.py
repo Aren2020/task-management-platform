@@ -7,7 +7,7 @@ CustomUser = get_user_model()
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ['email', 'username',]
+    list_display = ['id', 'email', 'username',]
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
